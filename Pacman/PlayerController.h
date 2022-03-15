@@ -1,3 +1,6 @@
+#ifndef PLAYERCONTROLLER_H
+#define PLAYERCONTROLLER_H
+
 #include "MyGame.h"
 #include "BaseComponent.h"
 #include "Drawer.h"
@@ -15,4 +18,4 @@ public:
 	void SetPlayerSpeed(const float speed);
 	virtual void Update(const float dt) override;
 };
-
+#endif

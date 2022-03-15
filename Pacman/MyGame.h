@@ -1,3 +1,6 @@
+#ifndef MYGAME_H
+#define MYGAME_H
+
 #include "PathmapTile.h"
 #include "Vector2f.h"
 #include <list>
@@ -24,4 +27,4 @@ public:
 	void Start();
 	void Update(const float dt);
 };
-
+#endif

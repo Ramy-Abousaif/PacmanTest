@@ -1,3 +1,6 @@
+#ifndef SPRITERENDERER_H
+#define SPRITERENDERER_H
+
 #include "Drawer.h"
 #include "BaseComponent.h"
 
@@ -15,4 +18,4 @@ public:
 	void SetSprite(const char* path);
 	void Update(const float dt) override {};
 };
-
+#endif

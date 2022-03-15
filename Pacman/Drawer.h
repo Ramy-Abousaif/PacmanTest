@@ -27,4 +27,4 @@ private:
 	SDL_Surface* world;
 };
 
-#endif // DRAWER_H
+#endif

@@ -1,3 +1,6 @@
+#ifndef PATHMAPTILE_H
+#define PATHMAPTILE_H
+
 class PathmapTile
 {
 private:
@@ -30,3 +33,4 @@ struct Tile
 	TileType type = TileType::Empty;
 	bool isWalkable = false;
 };
+#endif

@@ -14,8 +14,8 @@ PathmapTile* MapLoader::Read(const char* path)
 	if (!myfile.is_open())
 		return nullptr;
 
-	int rows = 0;
-	int columns = 0;
+	unsigned int rows = 0;
+	unsigned int columns = 0;
 
 	std::string line;
 	while (!myfile.eof())
@@ -34,10 +34,10 @@ PathmapTile* MapLoader::Read(const char* path)
 
 	PathmapTile* map = new PathmapTile(columns, rows);
 
-	for (int i = 0; i < lines.size(); ++i)
+	for (unsigned int i = 0; i < lines.size(); ++i)
 	{
-		int Y = lines.size() - 1 - i;
-		for (int j = 0; j < lines[i].length(); j++)
+		unsigned int Y = lines.size() - 1 - i;
+		for (unsigned int j = 0; j < lines[i].length(); j++)
 		{
 			Tile tile;
 			switch (lines[i][j])

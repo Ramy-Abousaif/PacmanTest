@@ -1,3 +1,6 @@
+#ifndef GAMEOBJECT_H
+#define GAMEOBJECT_H
+
 #include "Vector2f.h"
 #include <list>
 
@@ -29,4 +32,5 @@ public:
 		return component;
 	}
 };
+#endif
 
