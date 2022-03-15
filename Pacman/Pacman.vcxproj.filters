@@ -22,6 +22,9 @@
     <Filter Include="Math">
       <UniqueIdentifier>{407f4558-6586-4bc4-8b47-e4c33e7ecfdd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\MyFolder">
+      <UniqueIdentifier>{9be4b288-4e86-4d13-a0ef-35efd9b2c6b8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Pacman.cpp">
@@ -51,9 +54,6 @@
     <ClCompile Include="MovableGameEntity.cpp">
       <Filter>Game\Game entities\Movable</Filter>
     </ClCompile>
-    <ClCompile Include="PathmapTile.cpp">
-      <Filter>Game\World</Filter>
-    </ClCompile>
     <ClCompile Include="World.cpp">
       <Filter>Game\World</Filter>
     </ClCompile>
@@ -63,7 +63,28 @@
     <ClCompile Include="Vector2f.cpp">
       <Filter>Math</Filter>
     </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Game\MyFolder</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteRenderer.cpp">
+      <Filter>Game\MyFolder</Filter>
+    </ClCompile>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PathmapTile.cpp">
+      <Filter>Game\MyFolder</Filter>
+    </ClCompile>
+    <ClCompile Include="MyGame.cpp">
+      <Filter>Game\MyFolder</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerController.cpp">
+      <Filter>Game\MyFolder</Filter>
+    </ClCompile>
+    <ClCompile Include="MapLoader.cpp">
+      <Filter>Game\MyFolder</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseComponent.cpp">
+      <Filter>Game\MyFolder</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Pacman.h">
@@ -93,9 +114,6 @@
     <ClInclude Include="MovableGameEntity.h">
       <Filter>Game\Game entities\Movable</Filter>
     </ClInclude>
-    <ClInclude Include="PathmapTile.h">
-      <Filter>Game\World</Filter>
-    </ClInclude>
     <ClInclude Include="World.h">
       <Filter>Game\World</Filter>
     </ClInclude>
@@ -104,6 +122,27 @@
     </ClInclude>
     <ClInclude Include="Vector2f.h">
       <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteRenderer.h">
+      <Filter>Game\MyFolder</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Game\MyFolder</Filter>
+    </ClInclude>
+    <ClInclude Include="PathmapTile.h">
+      <Filter>Game\MyFolder</Filter>
+    </ClInclude>
+    <ClInclude Include="MyGame.h">
+      <Filter>Game\MyFolder</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerController.h">
+      <Filter>Game\MyFolder</Filter>
+    </ClInclude>
+    <ClInclude Include="MapLoader.h">
+      <Filter>Game\MyFolder</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseComponent.h">
+      <Filter>Game\MyFolder</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -41,9 +41,11 @@ private:
 	bool InitBigDots();
 
 	std::list<PathmapTile*> myPathmapTiles;
+	/*
 	std::list<Dot*> myDots;
 	std::list<BigDot*> myBigDots;
 	std::list<Cherry*> myCherry;
+	*/
 
 };
 

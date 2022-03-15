@@ -1,17 +1,32 @@
-#ifndef PATHMAPTILE_H
-#define PATHMAPTILE_H
-
 class PathmapTile
 {
+private:
+	int rows = 0;
+	int columns = 0;
+	Tile* map;
 public:
-	PathmapTile(int anX, int anY, bool aIsBlockingFlag);
-	~PathmapTile(void);
+	PathmapTile(int sizeX, int sizeY);
+	~PathmapTile();
 
-	int myX;
-	int myY;
-	bool myIsBlockingFlag;
-	bool myIsVisitedFlag;
-
+	Tile GetTile(int x, int y) const;
+	void SetTile(int x, int y, const Tile& tile);
+	int GetSizeX() const;
+	int GetSizeY() const;
 };
 
-#endif // PATHMAPTILE_H
+enum TileType
+{
+	Wall,
+	Dot,
+	BigDot,
+	Cherry,
+	Empty
+};
+
+struct Tile
+{
+	int x = 0;
+	int y = 0;
+	TileType type = TileType::Empty;
+	bool isWalkable = false;
+};

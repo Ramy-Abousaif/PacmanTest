@@ -38,7 +38,7 @@ void Ghost::Update(float aTime, World* aWorld)
 		{
 			PathmapTile* nextTile = myPath.front();
 			myPath.pop_front();
-			SetNextTile(nextTile->myX, nextTile->myY);
+			//SetNextTile(nextTile->myX, nextTile->myY);
 		}
 		else if (aWorld->TileIsValid(nextTileX, nextTileY))
 		{
@@ -94,10 +94,12 @@ void Ghost::SetImage(const char* anImage)
 
 void Ghost::Draw(Drawer* aDrawer)
 {
+	/*
 	if (myIsDeadFlag)
-		aDrawer->Draw("Ghost_Dead_32.png", (int)myPosition.myX + 220, (int)myPosition.myY + 60);
+		aDrawer->Draw("Ghost_Dead_32.png", (int)myPosition.X + 220, (int)myPosition.Y + 60);
 	else if (myIsClaimableFlag)
-		aDrawer->Draw("Ghost_Vulnerable_32.png", (int)myPosition.myX + 220, (int)myPosition.myY + 60);
+		aDrawer->Draw("Ghost_Vulnerable_32.png", (int)myPosition.X + 220, (int)myPosition.Y + 60);
 	else
-		aDrawer->Draw(myImage, (int)myPosition.myX + 220, (int)myPosition.myY + 60);
+		aDrawer->Draw(myImage, (int)myPosition.X + 220, (int)myPosition.Y + 60);
+	*/
 }

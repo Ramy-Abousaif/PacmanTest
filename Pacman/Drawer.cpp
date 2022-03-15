@@ -2,6 +2,7 @@
 #include "SDL.h"
 #include "SDL_image.h"
 #include "SDL_ttf.h"
+#include "Vector2f.h"
 
 Drawer* Drawer::Create(SDL_Window* aWindow, SDL_Renderer* aRenderer)
 {
@@ -28,34 +29,37 @@ Drawer::~Drawer(void)
 
 bool Drawer::Init()
 {
-	if (!myWindow)
+	if (myWindow == nullptr)
 		return false;
 
 	return true;
 }
 
-void Drawer::Draw(const char* anImage, int aCellX, int aCellY)
+void Drawer::Draw(const char* anImage, const Vector2f& pos)
 {
-	SDL_Surface* surface = IMG_Load( anImage ) ;
+	int screenWidth;
+	int screenHeigth;
+	SDL_GetWindowSize(myWindow, &screenWidth, &screenHeigth);
 
-	if (!surface)
-		return;
+	SDL_Surface* surface = IMG_Load(anImage);
+	SDL_Texture* texture = SDL_CreateTextureFromSurface(myRenderer, surface);
 
-	SDL_Texture* optimizedSurface = SDL_CreateTextureFromSurface(myRenderer, surface);
+	SDL_Rect sizeRect;
+	sizeRect.x = 0;
+	sizeRect.y = 0;
+	sizeRect.w = surface->w;
+	sizeRect.h = surface->h;
 
-    SDL_Rect sizeRect;
-    sizeRect.x = 0 ;
-    sizeRect.y = 0 ;
-    sizeRect.w = surface->w ;
-    sizeRect.h = surface->h ;
-
-    SDL_Rect posRect ;
-    posRect.x = aCellX;
-    posRect.y = aCellY;
+	SDL_Rect posRect;
+	posRect.x = (int)(pos.X * + ppuX + (screenWidth - sizeRect.w) / 2);
+	posRect.y = (int)(pos.Y * - ppuY + (screenHeigth - sizeRect.h) / 2);
 	posRect.w = sizeRect.w;
 	posRect.h = sizeRect.h;
 
-	SDL_RenderCopy(myRenderer, optimizedSurface, &sizeRect, &posRect);	
+	SDL_RenderCopyEx(myRenderer, texture, &sizeRect, &posRect, 0, nullptr, SDL_FLIP_NONE);
+
+	SDL_DestroyTexture(texture);
+	SDL_FreeSurface(surface);
 }
 
 void Drawer::DrawText(const char* aText, const char* aFontFile, int aX, int aY)
@@ -83,4 +87,14 @@ void Drawer::DrawText(const char* aText, const char* aFontFile, int aX, int aY)
 	SDL_DestroyTexture(optimizedSurface);
 	SDL_FreeSurface(surface);
 	TTF_CloseFont(font);
+}
+
+void Drawer::SetPPU(const int sizeX, const int sizeY)
+{
+	if (sizeX < 1 || sizeY < 1)
+	{
+		return;
+	}
+	this->ppuX = sizeX;
+	this->ppuY = sizeY;
 }

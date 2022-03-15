@@ -129,8 +129,8 @@ bool Pacman::UpdateInput()
 
 void Pacman::MoveAvatar()
 {
-	int nextTileX = myAvatar->GetCurrentTileX() + myNextMovement.myX;
-	int nextTileY = myAvatar->GetCurrentTileY() + myNextMovement.myY;
+	int nextTileX = myAvatar->GetCurrentTileX() + myNextMovement.X;
+	int nextTileY = myAvatar->GetCurrentTileY() + myNextMovement.Y;
 
 	if (myAvatar->IsAtDestination())
 	{

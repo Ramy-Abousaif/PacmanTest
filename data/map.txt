@@ -5,7 +5,7 @@ oxxxx.xxxxx.xx.xxxxx.xxxxo
 ..........................
 .xxxx.xx.xxxxxxxx.xx.xxxx.
 .xxxx.xx.xxxxxxxx.xx.xxxx.
-......xx....xx....xx......
+.c....xx....xx....xx....c.
 xxxxx.xxxxx xx xxxxx.xxxxx
 xxxxx.xxxxx xx xxxxx.xxxxx
 xxxxx.xx          xx.xxxxx
@@ -20,7 +20,7 @@ xxxxx.xx xxxxxxxx xx.xxxxx
 ............xx............
 .xxxx.xxxxx.xx.xxxxx.xxxx.
 .xxxx.xxxxx.xx.xxxxx.xxxx.
-...xx................xx...
+.c.xx................xx.c.
 xx.xx.xx.xxxxxxxx.xx.xx.xx
 xx.xx.xx.xxxxxxxx.xx.xx.xx
 ......xx....xx....xx......

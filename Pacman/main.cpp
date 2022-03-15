@@ -18,13 +18,17 @@ int main(int argc, char **argv)
 	SDL_Window* window = SDL_CreateWindow("Pacman", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1024, 768, SDL_WINDOW_OPENGL);
 	SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
-	if(!window)
+	if(window == nullptr)
 	{
 		assert(0 && "Failed to create window!");
 		exit(-1);
 	}
 
-	IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG);
+	if (IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG) != 3)
+	{
+		assert(0 && "No support for JPGs and PNGs!");
+		exit(-1);
+	}
 
 	if (TTF_Init() == -1)
 	{
@@ -33,22 +37,25 @@ int main(int argc, char **argv)
 	}
 
 	Drawer* drawer = Drawer::Create(window, renderer);
-	Pacman* pacman = Pacman::Create(drawer);
+	drawer->SetPPU(44, 44);
+	//Pacman* pacman = Pacman::Create(drawer);
 
-	float lastFrame = (float) SDL_GetTicks() * 0.001f;
 	SDL_Event event;
+	float lastFrame = (float)SDL_GetTicks() * 0.001f;
 	while (SDL_PollEvent(&event) >= 0)
 	{
 		float currentFrame = (float) SDL_GetTicks() * 0.001f;
 		float elapsedTime = currentFrame - lastFrame;
 
+		/*
 		if (!pacman->Update(elapsedTime))
 			break;
+		*/
 
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderClear(renderer);
 
-		pacman->Draw();
+		//pacman->Draw();
 		
 		lastFrame = currentFrame;		
 
@@ -56,7 +63,7 @@ int main(int argc, char **argv)
 		SDL_Delay(1);
 	}
 
-	delete pacman;
+	//delete pacman;
 	delete drawer;
 
 	TTF_Quit();
