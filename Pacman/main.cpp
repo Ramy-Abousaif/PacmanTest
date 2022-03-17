@@ -2,9 +2,9 @@
 #include "SDL_image.h"
 #include "SDL_ttf.h"
 #include "assert.h"
-#include "pacman.h"
 #include "drawer.h"
 #include <iostream>
+#include "MyGame.h"
 
 int main(int argc, char **argv)
 {
@@ -38,7 +38,10 @@ int main(int argc, char **argv)
 
 	Drawer* drawer = Drawer::Create(window, renderer);
 	drawer->SetPPU(44, 44);
-	//Pacman* pacman = Pacman::Create(drawer);
+
+	MyGame* game = new MyGame(drawer);
+
+	game->Start();
 
 	SDL_Event event;
 	float lastFrame = (float)SDL_GetTicks() * 0.001f;
@@ -47,15 +50,15 @@ int main(int argc, char **argv)
 		float currentFrame = (float) SDL_GetTicks() * 0.001f;
 		float elapsedTime = currentFrame - lastFrame;
 
-		/*
-		if (!pacman->Update(elapsedTime))
-			break;
-		*/
-
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderClear(renderer);
 
-		//pacman->Draw();
+		if (!game->Update(elapsedTime))
+		{
+			break;
+		}
+
+		game->Draw();
 		
 		lastFrame = currentFrame;		
 
@@ -63,7 +66,7 @@ int main(int argc, char **argv)
 		SDL_Delay(1);
 	}
 
-	//delete pacman;
+	delete game;
 	delete drawer;
 
 	TTF_Quit();

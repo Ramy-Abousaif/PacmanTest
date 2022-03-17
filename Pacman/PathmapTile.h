@@ -1,36 +1,39 @@
 #ifndef PATHMAPTILE_H
 #define PATHMAPTILE_H
 
-class PathmapTile
-{
-private:
-	int rows = 0;
-	int columns = 0;
-	Tile* map;
-public:
-	PathmapTile(int sizeX, int sizeY);
-	~PathmapTile();
-
-	Tile GetTile(int x, int y) const;
-	void SetTile(int x, int y, const Tile& tile);
-	int GetSizeX() const;
-	int GetSizeY() const;
-};
-
-enum TileType
+enum class TileType : short
 {
 	Wall,
 	Dot,
 	BigDot,
 	Cherry,
+	Teleport,
 	Empty
 };
 
 struct Tile
 {
-	int x = 0;
-	int y = 0;
 	TileType type = TileType::Empty;
 	bool isWalkable = false;
+};
+
+class PathmapTile
+{
+private:
+	Tile* map = nullptr;
+	float distBetweenTiles = 1.0f;
+	int rows = 0;
+	int columns = 0;
+
+public:
+	PathmapTile(unsigned int sizeX, unsigned int sizeY, float distBetweenTiles = 1.0f);
+	~PathmapTile();
+
+	unsigned int GetSizeX() const;
+	unsigned int GetSizeY() const;
+	float GetDistBetweenTiles() const;
+	void SetDistBetweenTiles(const float distBetweenTiles);
+	Tile GetTile(unsigned int x, unsigned int y) const;
+	void SetTile(unsigned int x, unsigned int y, const Tile& tile);
 };
 #endif

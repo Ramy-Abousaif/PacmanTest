@@ -3,28 +3,41 @@
 
 #include "PathmapTile.h"
 #include "Vector2f.h"
-#include <list>
+#include <vector>
+#include <string>
 
 class GameObject;
 class Drawer;
+class TextUI;
+class PointsUI;
 
 class MyGame
 {
 private:
 	Drawer* drawer;
-	std::list<GameObject*> gameObjects;
 	PathmapTile* map;
+	std::vector<GameObject*> gameObjects;
 	Vector2f input;
+	std::string fps = "0";
+	TextUI* fpsValue;
+	std::vector<GameObject*> gameObjectsToDestroy;
 
-	void UpdateInput();
+	void DestroyQueuedGameObjects();
+	bool UpdateInput();
 
 public:
 	MyGame(Drawer* drawer);
 	~MyGame();
 
+	static MyGame* Instance;
+
+	PathmapTile* GetMap() const;
 	Vector2f TakeInput() const;
 	void Draw() const;
+	GameObject* CreateGameObjectInstance(const Vector2f& pos = Vector2f(0.0f, 0.0f));
+	void DestroyGameObject(GameObject* go);
 	void Start();
-	void Update(const float dt);
+	bool Update(const float dt);
+	Drawer* GetDrawer() const;
 };
 #endif

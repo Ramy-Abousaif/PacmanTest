@@ -35,7 +35,7 @@ bool Drawer::Init()
 	return true;
 }
 
-void Drawer::Draw(const char* anImage, const Vector2f& pos)
+void Drawer::Draw(const char* anImage, const Vector2f& pos, bool flipX, bool flipY, float angle)
 {
 	int screenWidth;
 	int screenHeigth;
@@ -56,7 +56,8 @@ void Drawer::Draw(const char* anImage, const Vector2f& pos)
 	posRect.w = sizeRect.w;
 	posRect.h = sizeRect.h;
 
-	SDL_RenderCopyEx(myRenderer, texture, &sizeRect, &posRect, 0, nullptr, SDL_FLIP_NONE);
+	SDL_RendererFlip flip = (flipX) ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE | (flipY) ? SDL_FLIP_VERTICAL : SDL_FLIP_NONE;
+	SDL_RenderCopyEx(myRenderer, texture, &sizeRect, &posRect, angle, nullptr, flip);
 
 	SDL_DestroyTexture(texture);
 	SDL_FreeSurface(surface);

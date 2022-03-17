@@ -1,14 +1,14 @@
 #include "PathmapTile.h"
 
-PathmapTile::PathmapTile(int sizeX, int sizeY)
+PathmapTile::PathmapTile(unsigned int sizeX, unsigned int sizeY, float distBetweenTiles)
 {
 	if (sizeX < 1 || sizeY < 1)
 		return;
 
-	columns = sizeX;
-	rows = sizeY;
-
-	map = new Tile[rows * columns];
+	this->rows = sizeY;
+	this->columns = sizeX;
+	this->distBetweenTiles = distBetweenTiles;
+	this->map = new Tile[rows * columns];
 }
 
 PathmapTile::~PathmapTile()
@@ -16,7 +16,7 @@ PathmapTile::~PathmapTile()
 	delete[] map;
 }
 
-void PathmapTile::SetTile(int x, int y, const Tile& tile)
+void PathmapTile::SetTile(unsigned int x, unsigned int y, const Tile& tile)
 {
 	if (y >= rows || y < 0)
 		return;
@@ -25,27 +25,38 @@ void PathmapTile::SetTile(int x, int y, const Tile& tile)
 		return;
 
 	map[x + columns * y] = tile;
-	map[x + columns * y].x = x;
-	map[x + columns * y].y = y;
 }
 
-Tile PathmapTile::GetTile(int x, int y) const
+Tile PathmapTile::GetTile(unsigned int x, unsigned int y) const
 {
-	if (y >= rows || y < 0)
+	if (x >= columns || x < 0)
 		return Tile();
 
-	if (x >= columns || x < 0)
+	if (y >= rows || y < 0)
 		return Tile();
 
 	return map[x + columns * y];
 }
 
-int PathmapTile::GetSizeX() const
+unsigned int PathmapTile::GetSizeX() const
 {
 	return columns;
 }
 
-int PathmapTile::GetSizeY() const
+unsigned int PathmapTile::GetSizeY() const
 {
 	return rows;
+}
+
+float PathmapTile::GetDistBetweenTiles() const
+{
+	return this->distBetweenTiles;
+}
+
+void PathmapTile::SetDistBetweenTiles(const float distBetweenTiles)
+{
+	if (distBetweenTiles < 0.f)
+		return;
+
+	this->distBetweenTiles = distBetweenTiles;
 }

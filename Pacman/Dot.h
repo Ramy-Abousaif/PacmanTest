@@ -1,14 +1,19 @@
 #ifndef DOT_H
 #define DOT_H
 
-#include "StaticGameEntity.h"
-#include "Vector2f.h"
+#include "BaseComponent.h"
 
-class Dot : public StaticGameEntity
+class Dot : public BaseComponent
 {
-public:
-	Dot(Vector2f aPosition);
-	~Dot(void);
-};
+private:
+	unsigned int pointsToAdd = 0;
 
-#endif // DOT_H
+public:
+	Dot();
+	~Dot() override;
+	void Start() override;
+	void Update(const float dt) override;
+	void SetAddedPoints(const int points);
+	int GetAddedPoints() const;
+};
+#endif

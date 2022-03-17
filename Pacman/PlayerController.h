@@ -1,21 +1,34 @@
 #ifndef PLAYERCONTROLLER_H
 #define PLAYERCONTROLLER_H
 
-#include "MyGame.h"
 #include "BaseComponent.h"
-#include "Drawer.h"
+#include "Collision.h"
 
-class PlayerController : public BaseComponent
+class Animator;
+class PathPosition;
+class Movement;
+class Teleporter;
+
+class PlayerController : public BaseComponent, CollisionEventListener, PointsCollectedEventDispatcher
 {
 private:
-	MyGame* gameInstance;
+	Animator* anim = nullptr;
 	float speed = 1.0f;
+	PathPosition* pathPosition = nullptr;
+	Movement* movement = nullptr;
+	Vector2f prevInput = Vector2f(0.0f, 0.0f);
+	Teleporter* tpLoc = nullptr;
+	unsigned int points = 0;
 
 public:
-	PlayerController() = default;
-	~PlayerController() = default;
-	void SetGameInstance(MyGame* game);
+	PlayerController();
+	~PlayerController() override;
 	void SetPlayerSpeed(const float speed);
-	virtual void Update(const float dt) override;
+	void Start() override;
+	void Update(const float dt) override;
+
+	void OnEvent(const CollisionEvent& event, const CollisionEventDispatcher& sender) override;
+	void Assign(PointsCollectedEventListener* listener) { PointsCollectedEventDispatcher::Assign(listener); }
+	void Unassign(PointsCollectedEventListener* listener) { PointsCollectedEventDispatcher::Unassign(listener); }
 };
 #endif

@@ -1,10 +1,28 @@
 #include "Dot.h"
 
-Dot::Dot(Vector2f aPosition)
-: StaticGameEntity(aPosition, "Small_Dot_32.png")
+Dot::Dot()
+{
+	this->pointsToAdd = 0;
+}
+
+Dot::~Dot()
 {
 }
 
-Dot::~Dot(void)
+void Dot::Start()
 {
+}
+
+void Dot::Update(const float dt)
+{
+}
+
+void Dot::SetAddedPoints(const int points)
+{
+	this->pointsToAdd = points;
+}
+
+int Dot::GetAddedPoints() const
+{
+	return this->pointsToAdd;
 }

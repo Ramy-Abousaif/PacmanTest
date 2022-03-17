@@ -1,16 +1,16 @@
-#include "PathmapTile.h"
 #include "MapLoader.h"
+#include "PathmapTile.h"
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <vector>
 #include <sstream>
 
-PathmapTile* MapLoader::Read(const char* path)
+PathmapTile* MapLoader::Read(const char* filePath)
 {
 	std::vector<std::string> lines;
 
-	std::ifstream myfile(path);
+	std::ifstream myfile(filePath);
 	if (!myfile.is_open())
 		return nullptr;
 
@@ -42,9 +42,9 @@ PathmapTile* MapLoader::Read(const char* path)
 			Tile tile;
 			switch (lines[i][j])
 			{
-			case 'x':
-				tile.type = TileType::Wall;
-				tile.isWalkable = false;
+			case 'c':
+				tile.type = TileType::Cherry;
+				tile.isWalkable = true;
 				break;
 			case 'o':
 				tile.type = TileType::BigDot;
@@ -54,8 +54,12 @@ PathmapTile* MapLoader::Read(const char* path)
 				tile.type = TileType::Dot;
 				tile.isWalkable = true;
 				break;
-			case 'c':
-				tile.type = TileType::Cherry;
+			case 'x':
+				tile.type = TileType::Wall;
+				tile.isWalkable = false;
+				break;
+			case 't':
+				tile.type = TileType::Teleport;
 				tile.isWalkable = true;
 				break;
 			case ' ':

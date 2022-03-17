@@ -39,9 +39,6 @@
     <ClCompile Include="Cherry.cpp">
       <Filter>Game\Game entities\Static</Filter>
     </ClCompile>
-    <ClCompile Include="Dot.cpp">
-      <Filter>Game\Game entities\Static</Filter>
-    </ClCompile>
     <ClCompile Include="StaticGameEntity.cpp">
       <Filter>Game\Game entities\Static</Filter>
     </ClCompile>
@@ -85,6 +82,30 @@
     <ClCompile Include="BaseComponent.cpp">
       <Filter>Game\MyFolder</Filter>
     </ClCompile>
+    <ClCompile Include="Animator.cpp">
+      <Filter>Game\MyFolder</Filter>
+    </ClCompile>
+    <ClCompile Include="PathPosition.cpp">
+      <Filter>Game\MyFolder</Filter>
+    </ClCompile>
+    <ClCompile Include="Movement.cpp">
+      <Filter>Game\MyFolder</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Game\MyFolder</Filter>
+    </ClCompile>
+    <ClCompile Include="Teleporter.cpp">
+      <Filter>Game\MyFolder</Filter>
+    </ClCompile>
+    <ClCompile Include="Dot.cpp">
+      <Filter>Game\MyFolder</Filter>
+    </ClCompile>
+    <ClCompile Include="TextUI.cpp">
+      <Filter>Game\MyFolder</Filter>
+    </ClCompile>
+    <ClCompile Include="PointsUI.cpp">
+      <Filter>Game\MyFolder</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Pacman.h">
@@ -97,9 +118,6 @@
       <Filter>Game\Game entities\Static</Filter>
     </ClInclude>
     <ClInclude Include="Cherry.h">
-      <Filter>Game\Game entities\Static</Filter>
-    </ClInclude>
-    <ClInclude Include="Dot.h">
       <Filter>Game\Game entities\Static</Filter>
     </ClInclude>
     <ClInclude Include="StaticGameEntity.h">
@@ -142,6 +160,36 @@
       <Filter>Game\MyFolder</Filter>
     </ClInclude>
     <ClInclude Include="BaseComponent.h">
+      <Filter>Game\MyFolder</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator.h">
+      <Filter>Game\MyFolder</Filter>
+    </ClInclude>
+    <ClInclude Include="PathPosition.h">
+      <Filter>Game\MyFolder</Filter>
+    </ClInclude>
+    <ClInclude Include="Movement.h">
+      <Filter>Game\MyFolder</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Game\MyFolder</Filter>
+    </ClInclude>
+    <ClInclude Include="EventHandler.h">
+      <Filter>Game\MyFolder</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Game\MyFolder</Filter>
+    </ClInclude>
+    <ClInclude Include="Teleporter.h">
+      <Filter>Game\MyFolder</Filter>
+    </ClInclude>
+    <ClInclude Include="Dot.h">
+      <Filter>Game\MyFolder</Filter>
+    </ClInclude>
+    <ClInclude Include="TextUI.h">
+      <Filter>Game\MyFolder</Filter>
+    </ClInclude>
+    <ClInclude Include="PointsUI.h">
       <Filter>Game\MyFolder</Filter>
     </ClInclude>
   </ItemGroup>
