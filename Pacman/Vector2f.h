@@ -11,8 +11,8 @@ public:
 
 	Vector2f()
 	{
-		X = 0.f;
-		Y = 0.f;
+		X = 0.0f;
+		Y = 0.0f;
 	}
 
 	Vector2f(float anX, float anY)
@@ -77,10 +77,8 @@ public:
 	{
 		float length = Length();
 
-		if (length > 0.f)
-		{
+		if (length > 0.0f)
 			*this /= length;
-		}
 	}
 };
 

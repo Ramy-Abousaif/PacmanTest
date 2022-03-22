@@ -2,33 +2,47 @@
 #define PLAYERCONTROLLER_H
 
 #include "BaseComponent.h"
-#include "Collision.h"
+#include "Event.h"
 
 class Animator;
 class PathPosition;
 class Movement;
 class Teleporter;
 
-class PlayerController : public BaseComponent, CollisionEventListener, PointsCollectedEventDispatcher
+class PlayerController : public BaseComponent, CollisionEventListener, PelletCollectedEventDispatcher, BigPelletCollectedEventDispatcher, PlayerHitEventDispatcher, GhostKilledEventDispatcher
 {
+protected:
+	void _Update(const float& dt) override;
+
 private:
+	void Pellet();
+	void BigPellet();
+	void GhostKill();
+	void Hit();
+	bool IsWalkable(const unsigned int x, const unsigned int y) const;
+
 	Animator* anim = nullptr;
-	float speed = 1.0f;
 	PathPosition* pathPosition = nullptr;
 	Movement* movement = nullptr;
-	Vector2f prevInput = Vector2f(0.0f, 0.0f);
 	Teleporter* tpLoc = nullptr;
-	unsigned int points = 0;
+	int prevInputX = -1;
+	int prevInputY = 0;
 
 public:
 	PlayerController();
 	~PlayerController() override;
-	void SetPlayerSpeed(const float speed);
+
+	void Awake() override;
 	void Start() override;
-	void Update(const float dt) override;
 
 	void OnEvent(const CollisionEvent& event, const CollisionEventDispatcher& sender) override;
-	void Assign(PointsCollectedEventListener* listener) { PointsCollectedEventDispatcher::Assign(listener); }
-	void Unassign(PointsCollectedEventListener* listener) { PointsCollectedEventDispatcher::Unassign(listener); }
+	void Assign(PelletCollectedEventListener* listener);
+	void Unassign(PelletCollectedEventListener* listener);
+	void Assign(BigPelletCollectedEventListener* listener);
+	void Unassign(BigPelletCollectedEventListener* listener);
+	void Assign(PlayerHitEventListener* listener);
+	void Unassign(PlayerHitEventListener* listener);
+	void Assign(GhostKilledEventListener* listener);
+	void Unassign(GhostKilledEventListener* listener);
 };
 #endif

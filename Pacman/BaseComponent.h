@@ -1,18 +1,29 @@
 #ifndef BASECOMPONENT_H
 #define BASECOMPONENT_H
 
-#include "GameObject.h"
+class GameObject;
 
 class BaseComponent
 {
+protected:
+	virtual void _Draw() const {};
+	virtual void _Update(const float& dt) {};
+
+private:
+	bool active = true;
+	GameObject* gameObject = nullptr;
+
 public:
-	BaseComponent() = default;
+	BaseComponent();
 	virtual ~BaseComponent() = default;
 
-	GameObject* gameObject = nullptr;
+	virtual void Awake();
 	virtual void Start();
-	virtual void Draw() const;
-	virtual void Update(const float dt);
+	void SetActive(const bool _active);
+	bool GetActive() const;
+	GameObject* GetGameObject() const;
 	void SetGO(GameObject* go);
+	void Draw() const;
+	void Update(const float dt);
 };
 #endif

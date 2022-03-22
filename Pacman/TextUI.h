@@ -8,8 +8,10 @@ class Drawer;
 
 class TextUI : public BaseComponent
 {
+protected:
+	void _Draw() const override;
+
 private:
-	Drawer* drawer = nullptr;
 	std::string text;
 	int posX = 0;
 	int posY = 0;
@@ -19,13 +21,10 @@ public:
 	TextUI();
 	~TextUI() override;
 
-	void Draw() const override;
-	void SetDrawer(Drawer* drawer);
 	void SetPos(const int x, const int y);
 	void SetText(const std::string& text);
 	void SetFont(const char* fontPath);
 	int GetPosX() const;
     int GetPosY() const;
-	void Update(const float dt) override;
 };
 #endif

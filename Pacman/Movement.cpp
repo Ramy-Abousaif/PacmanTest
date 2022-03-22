@@ -1,12 +1,16 @@
 #include "Movement.h"
 #include "PathmapTile.h"
 #include "MyGame.h"
+#include "GameManager.h"
+#include "GameObject.h"
 #include "PathPosition.h"
 
 Movement::Movement()
 {
-	this->map = nullptr;
 	this->pathPosition = nullptr;
+
+	this->originSpeed = 1.0f;
+	this->speed = 1.0f;
 	this->desiredPosX = 0;
 	this->desiredPosY = 0;
 	this->currentPosX = 0;
@@ -18,41 +22,46 @@ Movement::~Movement()
 {
 }
 
-void Movement::Update(const float dt)
+void Movement::Awake()
 {
+	this->pathPosition = GetGameObject()->GetComponent<PathPosition>();
+	if (pathPosition == nullptr)
+		pathPosition = GetGameObject()->AddComponent<PathPosition>();
 }
 
 void Movement::Start()
 {
-	this->map = MyGame::Instance->GetMap();
-	this->pathPosition = gameObject->GetComponent<PathPosition>();
 	this->desiredPosX = this->pathPosition->GetTilePosX();
 	this->desiredPosY = this->pathPosition->GetTilePosY();
 	this->currentPosX = this->pathPosition->GetTilePosX();
 	this->currentPosY = this->pathPosition->GetTilePosY();
 }
 
-bool Movement::IsWalkable(const unsigned int x, const unsigned int y) const
+void Movement::_Update(const float& dt)
 {
-	if (x >= this->map->GetSizeX())
-		return false;
+	const unsigned int prevPosX = GetDesiredPosX();
+	const unsigned int prevPosY = GetDesiredPosY();
+	Vector2f finalPos = this->pathPosition->GetMap()->GetTileWorldPos(prevPosX, prevPosY);
+	Vector2f distance = finalPos - GetGameObject()->pos;
 
-	if (y >= this->map->GetSizeY())
-		return false;
-
-	const Tile& tile = map->GetTile(x, y);
-	return tile.isWalkable;
+	const float moveSpeed = dt * speed;
+	if (moveSpeed > distance.Length())
+		SetCurrentPos(prevPosX, prevPosY);
+	else
+	{
+		distance.Normalize();
+		GetGameObject()->pos += distance * moveSpeed;
+	}
 }
 
 bool Movement::SetDesiredPos(const unsigned int x, const unsigned int y)
 {
-	if (IsWalkable(x, y))
-	{
-		this->desiredPosX = x;
-		this->desiredPosY = y;
-		return true;
-	}
-	return false;
+	if (!this->pathPosition->GetMap()->IsPosValid(x, y))
+		return false;
+
+	this->desiredPosX = x;
+	this->desiredPosY = y;
+	return true;
 }
 
 unsigned int Movement::GetDesiredPosX() const
@@ -65,13 +74,26 @@ unsigned int Movement::GetDesiredPosY() const
 	return this->desiredPosY;
 }
 
+int Movement::GetDirX() const
+{
+	return (int)GetDesiredPosX() - (int)GetCurrentPosX();
+}
+
+int Movement::GetDirY() const
+{
+	return (int)GetDesiredPosY() - (int)GetCurrentPosY();
+}
+
 void Movement::SetCurrentPos(const unsigned int x, const unsigned int y)
 {
-	if (IsWalkable(x, y))
-	{
-		this->currentPosX = x;
-		this->currentPosY = y;
-	}
+	if (!this->pathPosition->GetMap()->IsPosValid(x, y))
+		return;
+
+	this->currentPosX = x;
+	this->currentPosY = y;
+	this->desiredPosX = x;
+	this->desiredPosY = y;
+	this->pathPosition->SetPos(x, y);
 }
 
 unsigned int Movement::GetCurrentPosX() const
@@ -86,6 +108,21 @@ unsigned int Movement::GetCurrentPosY() const
 
 bool Movement::ReachedDesiredPos() const
 {
-	return this->currentPosY == this->desiredPosY
-		&& this->currentPosX == this->desiredPosX;
+	return (GetCurrentPosY() == GetDesiredPosY()
+		&& GetCurrentPosX() == GetDesiredPosX());
+}
+
+void Movement::SetSpeed(const float& _speed)
+{
+	this->speed = _speed;
+}
+
+void Movement::SetOriginSpeed(const float& _originSpeed)
+{
+	this->originSpeed = _originSpeed;
+}
+
+float Movement::GetOriginSpeed()
+{
+	return this->originSpeed;
 }

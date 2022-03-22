@@ -9,20 +9,26 @@ class MyGame;
 
 enum class TagManager : short
 {
+	Default,
+	Manager,
 	Background,
 	UI,
 	Player,
 	Ghost,
 	Teleport,
-	Dot,
-	BigDot
+	Cherry,
+	Pellet,
+	BigPellet
 };
 
 class GameObject
 {
 private:
+	std::vector<BaseComponent*> initialComponents;
 	std::vector<BaseComponent*> components;
+	void StartComponents();
 	void UpdateComponents(const float dt);
+	void DrawComponents() const;
 	bool active = false;
 
 public:
@@ -38,13 +44,13 @@ public:
 	template<class T = BaseComponent>
 	T* GetComponent()
 	{
-		for (unsigned int i = 0; i < components.size(); ++i)
+		for (BaseComponent* component : components)
 		{
-			T* component = dynamic_cast<T*>(components[i]);
-			if (component == nullptr)
+			T* thisComponent = dynamic_cast<T*>(component);
+			if (thisComponent == nullptr)
 				continue;
 
-			return component;
+			return thisComponent;
 		}
 		return nullptr;
 	}
@@ -54,8 +60,9 @@ public:
 	{
 		T* component = new T();
 		component->SetGO(this);
+		initialComponents.push_back(component);
 		components.push_back(component);
-		component->Start();
+		component->Awake();
 		return component;
 	}
 };

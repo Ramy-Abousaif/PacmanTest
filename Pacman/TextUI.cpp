@@ -1,9 +1,10 @@
 #include "TextUI.h"
 #include "Drawer.h"
+#include "MyGame.h"
 
 TextUI::TextUI()
 {
-	this->drawer = nullptr;
+	this->fontPath = "";
 	this->posX = 0;
 	this->posY = 0;
 }
@@ -13,22 +14,9 @@ TextUI::~TextUI()
 {
 }
 
-void TextUI::SetDrawer(Drawer* drawer)
+void TextUI::_Draw() const
 {
-	if (drawer == nullptr)
-		return;
-
-	this->drawer = drawer;
-}
-
-void TextUI::Draw() const
-{
-	this->drawer->DrawText(text.c_str(), fontPath, posX, posY);
-}
-
-void TextUI::Update(const float dt)
-{
-
+	MyGame::Instance->GetDrawer()->DrawText(text.c_str(), fontPath, posX, posY);
 }
 
 void TextUI::SetText(const std::string& text)

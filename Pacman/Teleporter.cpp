@@ -1,6 +1,4 @@
 #include "Teleporter.h"
-#include "MyGame.h"
-#include <vector>
 
 Teleporter::Teleporter()
 {
@@ -10,11 +8,6 @@ Teleporter::Teleporter()
 Teleporter::~Teleporter()
 {
 }
-
-void Teleporter::Start()
-{
-}
-
 
 Teleporter* Teleporter::GetOtherTP()
 {
@@ -27,8 +20,4 @@ void Teleporter::SetOtherTP(Teleporter* otherTP)
 		return;
 
 	this->other = otherTP;
-}
-
-void Teleporter::Update(const float dt)
-{
 }

@@ -1,45 +1,46 @@
-#include "PointsUI.h"
-#include "TextUI.h"
+#include "LivesUI.h"
 #include "Drawer.h"
 #include "GameObject.h"
 #include "GameManager.h"
+#include "TextUI.h"
 #include <string>
 #include <sstream>
 #include "MyGame.h"
 
-PointsUI::PointsUI()
+LivesUI::LivesUI()
 {
 	this->text = nullptr;
 }
 
-PointsUI::~PointsUI()
+
+LivesUI::~LivesUI()
 {
 }
 
-void PointsUI::Awake()
+void LivesUI::Awake()
 {
 	this->text = GetGameObject()->GetComponent<TextUI>();
 	if (this->text == nullptr)
 		this->text = GetGameObject()->AddComponent<TextUI>();
 }
 
-void PointsUI::Start()
+void LivesUI::Start()
 {
 	GameManager* gameManager = MyGame::Instance->GetComponent<GameManager>();
 	if(gameManager != nullptr)
-		gameManager->Assign((PointsCollectedEventListener*)this);
+		gameManager->Assign((LivesUpdateEventListener*)this);
 }
 
-void PointsUI::ShowPoints(const unsigned int _points)
+void LivesUI::ShowLives(const unsigned int _lives)
 {
 	std::string text;
 	std::stringstream textStream;
-	textStream << _points;
+	textStream << _lives;
 	text = textStream.str();
 	this->text->SetText(text);
 }
 
-void PointsUI::OnEvent(const PointsCollectedEvent& event, const PointsCollectedEventDispatcher& sender)
+void LivesUI::OnEvent(const LivesUpdateEvent& event, const LivesUpdateEventDispatcher& sender)
 {
-	ShowPoints(event.points);
+	ShowLives(event.lives);
 }

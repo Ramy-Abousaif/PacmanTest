@@ -34,44 +34,56 @@ PathmapTile* MapLoader::Read(const char* filePath)
 
 	PathmapTile* map = new PathmapTile(columns, rows);
 
-	for (unsigned int i = 0; i < lines.size(); ++i)
+	for (unsigned int columns = 0; columns < lines.size(); ++columns)
 	{
-		unsigned int Y = lines.size() - 1 - i;
-		for (unsigned int j = 0; j < lines[i].length(); j++)
+		unsigned int y = lines.size() - 1 - columns;
+		for (unsigned int x = 0; x < lines[columns].length(); x++)
 		{
 			Tile tile;
-			switch (lines[i][j])
+			switch (lines[columns][x])
 			{
 			case 'c':
 				tile.type = TileType::Cherry;
-				tile.isWalkable = true;
+				tile.canPlayerWalk = true;
+				tile.canEnemyWalk = true;
 				break;
 			case 'o':
-				tile.type = TileType::BigDot;
-				tile.isWalkable = true;
+				tile.type = TileType::BigPellet;
+				tile.canPlayerWalk = true;
+				tile.canEnemyWalk = true;
 				break;
 			case '.':
-				tile.type = TileType::Dot;
-				tile.isWalkable = true;
+				tile.type = TileType::Pellet;
+				tile.canPlayerWalk = true;
+				tile.canEnemyWalk = true;
 				break;
 			case 'x':
 				tile.type = TileType::Wall;
-				tile.isWalkable = false;
+				tile.canPlayerWalk = false;
+				tile.canEnemyWalk = false;
+				break;
+			case 'g':
+				tile.type = TileType::GhostTile;
+				tile.canPlayerWalk = false;
+				tile.canEnemyWalk = true;
 				break;
 			case 't':
-				tile.type = TileType::Teleport;
-				tile.isWalkable = true;
+				tile.type = TileType::TeleportTile;
+				tile.canPlayerWalk = true;
+				tile.canEnemyWalk = true;
 				break;
 			case ' ':
 				tile.type = TileType::Empty;
-				tile.isWalkable = true;
+				tile.canPlayerWalk = true;
+				tile.canEnemyWalk = true;
 				break;
 			default:
 				tile.type = TileType::Empty;
-				tile.isWalkable = true;
+				tile.canPlayerWalk = true;
+				tile.canEnemyWalk = true;
 				break;
 			}
-			map->SetTile(j, Y, tile);
+			map->SetTile(x, y, tile);
 		}
 	}
 

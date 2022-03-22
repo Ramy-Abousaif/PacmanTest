@@ -1,4 +1,5 @@
 #include "Collision.h"
+#include "MyGame.h"
 
 Collision::Collision()
 {
@@ -18,11 +19,12 @@ void Collision::Unassign(CollisionEventListener* listener)
 	CollisionEventDispatcher::Unassign(listener);
 }
 
-void Collision::Start()
+void Collision::SetSize(const float _radius)
 {
+	this->radius = _radius;
 }
 
-void Collision::Update(const float dt)
+void Collision::_Update(const float& dt)
 {
 	Vector2f dist;
 	for (unsigned int i = 0; i < others.size(); ++i)
@@ -30,8 +32,8 @@ void Collision::Update(const float dt)
 		if (others[i] == nullptr)
 			continue;
 
-		dist = this->gameObject->pos - others[i]->pos;
-		if (dist.Length() < 0.5f)
+		dist = this->GetGameObject()->pos - others[i]->pos;
+		if (dist.Length() < radius)
 		{
 			CollisionType type = CollisionType::OnEnter;
 			if (colType.count(others[i]) == 0)
@@ -45,7 +47,7 @@ void Collision::Update(const float dt)
 			CollisionEvent event;
 			event.type = type;
 			event.other = others[i];
-			event.sender = this->gameObject;
+			event.thisGO = this->GetGameObject();
 			Invoke(event);
 		}
 		else
@@ -55,7 +57,7 @@ void Collision::Update(const float dt)
 				CollisionEvent event;
 				event.type = CollisionType::OnExit;
 				event.other = others[i];
-				event.sender = this->gameObject;
+				event.thisGO = this->GetGameObject();
 				Invoke(event);
 				colType.erase(others[i]);
 			}

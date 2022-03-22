@@ -35,7 +35,7 @@ bool Drawer::Init()
 	return true;
 }
 
-void Drawer::Draw(const char* anImage, const Vector2f& pos, bool flipX, bool flipY, float angle)
+void Drawer::Draw(const char* anImage, const Vector2f& pos, bool flipX, bool flipY, float angle, float r, float g, float b)
 {
 	int screenWidth;
 	int screenHeigth;
@@ -57,6 +57,7 @@ void Drawer::Draw(const char* anImage, const Vector2f& pos, bool flipX, bool fli
 	posRect.h = sizeRect.h;
 
 	SDL_RendererFlip flip = (flipX) ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE | (flipY) ? SDL_FLIP_VERTICAL : SDL_FLIP_NONE;
+	SDL_SetTextureColorMod(texture, (Uint8)r, (Uint8)g, (Uint8)b);
 	SDL_RenderCopyEx(myRenderer, texture, &sizeRect, &posRect, angle, nullptr, flip);
 
 	SDL_DestroyTexture(texture);
@@ -67,7 +68,7 @@ void Drawer::DrawText(const char* aText, const char* aFontFile, int aX, int aY)
 {
 	TTF_Font* font=TTF_OpenFont(aFontFile, 24);
 
-	SDL_Color fg={255,0,0,255};
+	SDL_Color fg={255,255,255,255};
 	SDL_Surface* surface = TTF_RenderText_Solid(font, aText, fg);
 
 	SDL_Texture* optimizedSurface = SDL_CreateTextureFromSurface(myRenderer, surface);
@@ -93,9 +94,8 @@ void Drawer::DrawText(const char* aText, const char* aFontFile, int aX, int aY)
 void Drawer::SetPPU(const int sizeX, const int sizeY)
 {
 	if (sizeX < 1 || sizeY < 1)
-	{
 		return;
-	}
+
 	this->ppuX = sizeX;
 	this->ppuY = sizeY;
 }

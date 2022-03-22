@@ -47,21 +47,18 @@ int main(int argc, char **argv)
 	float lastFrame = (float)SDL_GetTicks() * 0.001f;
 	while (SDL_PollEvent(&event) >= 0)
 	{
-		float currentFrame = (float) SDL_GetTicks() * 0.001f;
+		float currentFrame = (float)SDL_GetTicks() * 0.001f;
 		float elapsedTime = currentFrame - lastFrame;
 
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderClear(renderer);
 
 		if (!game->Update(elapsedTime))
-		{
 			break;
-		}
 
 		game->Draw();
 		
 		lastFrame = currentFrame;		
-
 		SDL_RenderPresent(renderer);
 		SDL_Delay(1);
 	}

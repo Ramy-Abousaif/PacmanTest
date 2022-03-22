@@ -1,25 +1,21 @@
 #ifndef MYGAME_H
 #define MYGAME_H
 
-#include "PathmapTile.h"
 #include "Vector2f.h"
 #include <vector>
+#include "GameObject.h"
 #include <string>
 
 class GameObject;
 class Drawer;
-class TextUI;
-class PointsUI;
 
 class MyGame
 {
 private:
 	Drawer* drawer;
-	PathmapTile* map;
 	std::vector<GameObject*> gameObjects;
 	Vector2f input;
-	std::string fps = "0";
-	TextUI* fpsValue;
+	bool toggleFPS = false;
 	std::vector<GameObject*> gameObjectsToDestroy;
 
 	void DestroyQueuedGameObjects();
@@ -31,8 +27,71 @@ public:
 
 	static MyGame* Instance;
 
-	PathmapTile* GetMap() const;
+	std::vector<GameObject*> GetGameObjectsByTag(const TagManager& _tag);
+	std::vector<GameObject*> GetAllGameObjects() const;
+
+	template<class T = BaseComponent>
+	std::vector<T*> GetComponents()
+	{
+		std::vector<T*> output;
+		for (GameObject* go : gameObjects)
+		{
+			if (go == nullptr)
+				continue;
+
+			T* component = go->GetComponent<T>();
+			if (component != nullptr)
+				output.push_back(component);
+		}
+		return output;
+	}
+	template<class T = BaseComponent>
+	T* GetComponent()
+	{
+		for (GameObject* go : gameObjects)
+		{
+			if (go == nullptr)
+				continue;
+
+			T* component = go->GetComponent<T>();
+			if (component != nullptr)
+				return component;
+		}
+		return nullptr;
+	}
+
+	template<class T = BaseComponent>
+	std::vector<GameObject*> GetGameObjectsByComponent()
+	{
+		std::vector<GameObject*> result;
+		for (GameObject* obj : gameObjects)
+		{
+			if (obj == nullptr)
+				continue;
+
+			if (obj->GetComponent<T>() != nullptr)
+				result.push_back(obj);
+		}
+		return result;
+	}
+
+	template<class T = BaseComponent>
+	GameObject* GetGameObjectByComponent()
+	{
+		for (GameObject* obj : gameObjects)
+		{
+			if (obj == nullptr)
+				continue;
+
+			if (obj->GetComponent<T>() != nullptr)
+				return obj;
+		}
+		return nullptr;
+	}
+
 	Vector2f TakeInput() const;
+	void ResetInput();
+	bool ShowFPS();
 	void Draw() const;
 	GameObject* CreateGameObjectInstance(const Vector2f& pos = Vector2f(0.0f, 0.0f));
 	void DestroyGameObject(GameObject* go);

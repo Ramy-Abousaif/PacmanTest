@@ -5,12 +5,21 @@ GameObject::GameObject(const Vector2f& pos)
 {
 	this->active = true;
 	this->pos = pos;
+	this->tag = TagManager::Default;
 }
 
 GameObject::~GameObject()
 {
-	for (unsigned int i = 0; i < components.size(); ++i)
-		delete components[i];
+	for (BaseComponent* component : components)
+		delete component;
+}
+
+void GameObject::StartComponents()
+{
+	for (BaseComponent* initialComponent : initialComponents)
+		initialComponent->Start();
+
+	initialComponents.clear();
 }
 
 void GameObject::UpdateComponents(const float dt)
@@ -19,11 +28,17 @@ void GameObject::UpdateComponents(const float dt)
 		component->Update(dt);
 }
 
+void GameObject::DrawComponents() const
+{
+	for (BaseComponent* component : components)
+		component->Draw();
+}
 void GameObject::Update(const float dt)
 {
 	if (!active)
 		return;
 
+	StartComponents();
 	UpdateComponents(dt);
 }
 
@@ -32,8 +47,7 @@ void GameObject::Draw() const
 	if (!active)
 		return;
 
-	for (BaseComponent* component : components)
-		component->Draw();
+	DrawComponents();
 }
 
 void GameObject::SetActive(const bool _active)

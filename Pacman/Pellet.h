@@ -1,18 +1,16 @@
-#ifndef DOT_H
-#define DOT_H
+#ifndef PELLET_H
+#define PELLET_H
 
 #include "BaseComponent.h"
 
-class Dot : public BaseComponent
+class Pellet : public BaseComponent
 {
 private:
 	unsigned int pointsToAdd = 0;
 
 public:
-	Dot();
-	~Dot() override;
-	void Start() override;
-	void Update(const float dt) override;
+	Pellet();
+	~Pellet() override;
 	void SetAddedPoints(const int points);
 	int GetAddedPoints() const;
 };

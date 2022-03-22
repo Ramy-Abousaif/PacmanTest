@@ -1,26 +1,18 @@
 #include "SpriteRenderer.h"
+#include "MyGame.h"
+#include "Drawer.h"
+#include "GameObject.h"
 
 SpriteRenderer::SpriteRenderer()
 {
-	drawer = nullptr;
 	path = nullptr;
 	flipX = false;
 	flipY = false;
-	rot = 0.f;
+	rot = 0.0f;
 }
 
 SpriteRenderer::~SpriteRenderer()
 {
-}
-
-void SpriteRenderer::Update(const float dt)
-{
-
-}
-
-void SpriteRenderer::SetDrawer(Drawer* drawer)
-{
-	this->drawer = drawer;
 }
 
 void SpriteRenderer::SetSprite(const char* path)
@@ -28,9 +20,31 @@ void SpriteRenderer::SetSprite(const char* path)
 	this->path = path;
 }
 
-void SpriteRenderer::Draw() const
+void SpriteRenderer::_Draw() const
 {
-	drawer->Draw(path, gameObject->pos, flipX, flipY, rot);
+	MyGame::Instance->GetDrawer()->Draw(path, GetGameObject()->pos, flipX, flipY, rot, r, g, b);
+}
+
+void SpriteRenderer::SetColour(float r, float g, float b)
+{
+	this->r = r;
+	this->g = g;
+	this->b = b;
+}
+
+float SpriteRenderer::GetColourR()
+{
+	return this->r;
+}
+
+float SpriteRenderer::GetColourG()
+{
+	return this->g;
+}
+
+float SpriteRenderer::GetColourB()
+{
+	return this->b;
 }
 
 void SpriteRenderer::SetFlip(const bool x, const bool y)

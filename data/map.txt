@@ -6,22 +6,22 @@ x.xxxx.xxxxx.xx.xxxxx.xxxx.x
 x..........................x
 x.xxxx.xx.xxxxxxxx.xx.xxxx.x
 x.xxxx.xx.xxxxxxxx.xx.xxxx.x
-xc.....xx....xx....xx.....cx
+x......xx....xx....xx......x
 xxxxxx.xxxxx xx xxxxx.xxxxxx
 xxxxxx.xxxxx xx xxxxx.xxxxxx
 xxxxxx.xx          xx.xxxxxx
-xxxxxx.xx xxx  xxx xx.xxxxxx
-xxxxxx.xx x      x xx.xxxxxx
-t     .   x      x   .     t
-xxxxxx.xx x      x xx.xxxxxx
+xxxxxx.xx xxxggxxx xx.xxxxxx
+xxxxxx.xx xxxggxxx xx.xxxxxx
+t     .   xxggggxx   .     t
 xxxxxx.xx xxxxxxxx xx.xxxxxx
-xxxxxx.xx          xx.xxxxxx
+xxxxxx.xx xxxxxxxx xx.xxxxxx
+xxxxxx.xx    cc    xx.xxxxxx
 xxxxxx.xx xxxxxxxx xx.xxxxxx
 xxxxxx.xx xxxxxxxx xx.xxxxxx
 x............xx............x
 x.xxxx.xxxxx.xx.xxxxx.xxxx.x
 x.xxxx.xxxxx.xx.xxxxx.xxxx.x
-xc..xx................xx..cx
+x...xx................xx...x
 xxx.xx.xx.xxxxxxxx.xx.xx.xxx
 xxx.xx.xx.xxxxxxxx.xx.xx.xxx
 x......xx....xx....xx......x
