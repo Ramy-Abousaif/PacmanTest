@@ -122,7 +122,6 @@
     <ClCompile Include="Audio.cpp" />
     <ClCompile Include="BaseComponent.cpp" />
     <ClCompile Include="Collision.cpp" />
-    <ClCompile Include="Pellet.cpp" />
     <ClCompile Include="Drawer.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyPathFinder.cpp" />
@@ -147,7 +146,6 @@
     <ClInclude Include="Audio.h" />
     <ClInclude Include="BaseComponent.h" />
     <ClInclude Include="Collision.h" />
-    <ClInclude Include="Pellet.h" />
     <ClInclude Include="Drawer.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyPathFinder.h" />

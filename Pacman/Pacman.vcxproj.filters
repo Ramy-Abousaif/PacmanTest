@@ -76,10 +76,9 @@
     <ClCompile Include="EnemyPathFinder.cpp">
       <Filter>Game\MyFolder</Filter>
     </ClCompile>
-    <ClCompile Include="Pellet.cpp">
+    <ClCompile Include="Audio.cpp">
       <Filter>Game\MyFolder</Filter>
     </ClCompile>
-    <ClCompile Include="Audio.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Drawer.h">
@@ -148,9 +147,8 @@
     <ClInclude Include="EnemyPathFinder.h">
       <Filter>Game\MyFolder</Filter>
     </ClInclude>
-    <ClInclude Include="Pellet.h">
+    <ClInclude Include="Audio.h">
       <Filter>Game\MyFolder</Filter>
     </ClInclude>
-    <ClInclude Include="Audio.h" />
   </ItemGroup>
 </Project>
