@@ -119,6 +119,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animator.cpp" />
+    <ClCompile Include="Audio.cpp" />
     <ClCompile Include="BaseComponent.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Pellet.cpp" />
@@ -143,6 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animator.h" />
+    <ClInclude Include="Audio.h" />
     <ClInclude Include="BaseComponent.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Pellet.h" />

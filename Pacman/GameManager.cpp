@@ -19,6 +19,17 @@ GameManager::GameManager()
 {
 	this->playerController = nullptr;
 	this->gs = GameState::Pause;
+	introSound = new Audio("audio\\intro.wav");
+	chomp = new Audio("audio\\chomp.wav");
+	bigChomp = new Audio("audio\\big_chomp.wav");
+	ghostKill = new Audio("audio\\ghost_kill.wav");
+	death = new Audio("audio\\death.wav");
+
+	introSound->SetUpDevice();
+	chomp->SetUpDevice();
+	bigChomp->SetUpDevice();
+	ghostKill->SetUpDevice();
+	death->SetUpDevice();
 }
 
 
@@ -315,6 +326,7 @@ void GameManager::OnEvent(const PlayerHitEvent& event, const PlayerHitEventDispa
 		return;
 	}
 
+	death->Play();
 	lives--;
 	LivesUpdateEvent livesUpdateEvent;
 	livesUpdateEvent.lives = lives;
@@ -325,6 +337,9 @@ void GameManager::OnEvent(const PlayerHitEvent& event, const PlayerHitEventDispa
 
 void GameManager::OnEvent(const PelletCollectedEvent& event, const PelletCollectedEventDispatcher& sender)
 {
+	if(gs == GameState::Play)
+		chomp->Play();
+
 	pelletsOnMap--;
 	AddPoints(10);
 
@@ -334,6 +349,7 @@ void GameManager::OnEvent(const PelletCollectedEvent& event, const PelletCollect
 
 void GameManager::OnEvent(const BigPelletCollectedEvent& event, const BigPelletCollectedEventDispatcher& sender)
 {
+	bigChomp->Play();
 	pelletsOnMap--;
 	streak = 1;
 	AddPoints(50);
@@ -344,6 +360,7 @@ void GameManager::OnEvent(const BigPelletCollectedEvent& event, const BigPelletC
 
 void GameManager::OnEvent(const GhostKilledEvent& event, const GhostKilledEventDispatcher& sender)
 {
+	ghostKill->Play();
 	AddPoints(200 * streak);
 	streak++;
 	stopTimer = 0.0f;
@@ -357,6 +374,7 @@ void GameManager::Awake()
 
 void GameManager::Start()
 {
+	introSound->Play();
 	InitMap();
 	InitMapOBJs();
 
@@ -397,7 +415,7 @@ void GameManager::_Update(const float& dt)
 						MyGame::Instance->DestroyGameObject(readyTextGO);
 				}
 			}
-		break;
+			break;
 		}
 	}
 

@@ -4,6 +4,7 @@
 #include "BaseComponent.h"
 #include "Event.h"
 #include "GameObject.h"
+#include "Audio.h"
 
 class PlayerController;
 class Enemy;
@@ -37,6 +38,12 @@ private:
 	unsigned int points = 0;
 	unsigned int pelletsOnMap = 0;
 	unsigned int streak = 1;
+
+	Audio* introSound;
+	Audio* chomp;
+	Audio* ghostKill;
+	Audio* bigChomp;
+	Audio* death;
 
 	PlayerController* playerController = nullptr;
 	std::vector<Enemy*> enemies;
